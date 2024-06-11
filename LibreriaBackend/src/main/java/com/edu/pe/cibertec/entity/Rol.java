@@ -15,19 +15,22 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tbl_autor")
-public class Autor {
+@Table(name = "tbl_rol")
+public class Rol {
 
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "idAutor")
-	 private int idAutor; 
-	    
-	 @Column(name = "nombreCompleto")
-	 private String nombreCompleto;
-
-	 @JsonIgnore
-	 @OneToMany(mappedBy = "autor")
-	 private List<AutorLibro> listaAutorLibro;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idRol")
+	private int idRol;
+	
+	@Column(name = "descripcion")
+	private String descripcion;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "rol")
+	private List<Usuario> listaUsuario;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "rol")
+	private List<RolEnlace> listaRolEnlace;
 }
