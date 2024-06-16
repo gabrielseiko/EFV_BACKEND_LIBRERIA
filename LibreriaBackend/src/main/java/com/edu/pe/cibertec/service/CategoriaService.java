@@ -1,10 +1,10 @@
-package com.edu.pe.cibertec.repositoryService;
+package com.edu.pe.cibertec.service;
 
 import java.util.List;
 
 import com.edu.pe.cibertec.entity.Categoria;
 
-public interface ICategoriaService {
+public interface CategoriaService {
 
 	// Para Validaciones
 	public abstract List<Categoria> listaCategoriaPorDescripcionIgual(String descripcion);

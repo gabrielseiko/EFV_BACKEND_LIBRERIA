@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.edu.pe.cibertec.entity.Libro;
-import com.edu.pe.cibertec.repository.ILibroRepository;
-import com.edu.pe.cibertec.repositoryService.ILibroService;
+import com.edu.pe.cibertec.repository.LibroRepository;
 
-public class LibroServiceImp implements ILibroService{
+public class LibroServiceImp implements LibroService{
 	
 	@Autowired
-	private ILibroRepository repository;
+	private LibroRepository repository;
 	
 	@Override
 	public Libro insertaActualizaLibro(Libro obj) {

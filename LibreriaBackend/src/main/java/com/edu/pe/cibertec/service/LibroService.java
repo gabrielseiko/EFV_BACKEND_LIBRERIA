@@ -1,10 +1,10 @@
-package com.edu.pe.cibertec.repositoryService;
+package com.edu.pe.cibertec.service;
 
 import java.util.List;
 
 import com.edu.pe.cibertec.entity.Libro;
 
-public interface ILibroService {
+public interface LibroService {
 	// Para Validaciones
 	public abstract List<Libro> listaLibroPorTituloIgual(String titulo);
 

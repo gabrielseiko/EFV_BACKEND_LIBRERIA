@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.edu.pe.cibertec.entity.Libro;
 
-public interface ILibroRepository extends JpaRepository<Libro, Integer>{
+public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	@Query("select l from tbl_libro l where l.titulo = ?1")
 	public abstract List<Libro> listaLibroPorTituloIgual(String titulo);
 	

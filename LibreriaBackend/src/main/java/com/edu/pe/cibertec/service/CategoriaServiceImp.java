@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.edu.pe.cibertec.entity.Categoria;
-import com.edu.pe.cibertec.repository.ICategoriaRepository;
-import com.edu.pe.cibertec.repositoryService.ICategoriaService;
+import com.edu.pe.cibertec.repository.CategoriaRepository;
 
-public class CategoriaServiceImp implements ICategoriaService{
+public class CategoriaServiceImp implements CategoriaService{
 
 	@Autowired
-	private ICategoriaRepository repository;
+	private CategoriaRepository repository;
 	
 	@Override
 	public Categoria insertaActualizaCategoria(Categoria obj) {
