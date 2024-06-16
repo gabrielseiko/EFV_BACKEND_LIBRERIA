@@ -1,7 +1,10 @@
 package com.edu.pe.cibertec.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,13 +15,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tbl_libro_reserva")
+@Table(name = "tbl_libroreserva")
 public class LibroReserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLibroReserva")
-    private Integer idLibroReserva;
+    private int idLibroReserva;
     
     @Column(name = "stock")
     private int stock;
@@ -26,7 +29,8 @@ public class LibroReserva {
     @Column(name = "estado")
     private int estado;
     
-    @ManyToOne
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idLibro")
     private Libro libro;
 }
