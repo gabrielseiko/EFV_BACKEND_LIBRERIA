@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.pe.cibertec.entity.Autor;
-import com.edu.pe.cibertec.repository.IAutorRepository;
+import com.edu.pe.cibertec.repository.AutorRepository;
 
 @Service
 public class AutorServiceImpl implements AutorService {
 
 	@Autowired
-	private IAutorRepository data;
+	private AutorRepository data;
 	
 	@Override
 	public List<Autor> ListadoAutores() {
