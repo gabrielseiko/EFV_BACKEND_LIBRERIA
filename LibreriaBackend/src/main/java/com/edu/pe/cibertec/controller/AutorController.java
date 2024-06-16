@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.edu.pe.cibertec.entity.Autor;
 import com.edu.pe.cibertec.service.AutorServiceImpl;
 
+
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -18,6 +20,8 @@ public class AutorController {
 
 	@Autowired
 	private AutorServiceImpl servicio;
+
+
 
 	//LISTADO DE AUTORES
 	@RequestMapping("/listarAutores")

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.pe.cibertec.entity.Autor;
 
-public interface IAutorRepository extends JpaRepository<Autor, Integer> {
+@Repository
+public interface AutorRepository extends JpaRepository<Autor, Integer> {
+
 
 	
 }

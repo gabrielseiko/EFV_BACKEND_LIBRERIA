@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -41,4 +42,5 @@ public class Libro {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
+   
 }
