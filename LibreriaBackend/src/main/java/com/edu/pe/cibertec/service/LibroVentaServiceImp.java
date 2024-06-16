@@ -3,10 +3,12 @@ package com.edu.pe.cibertec.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.edu.pe.cibertec.entity.LibroVenta;
 import com.edu.pe.cibertec.repository.LibroVentaRepository;
 
+@Service
 public class LibroVentaServiceImp implements LibroVentaService {
 	
 	@Autowired
