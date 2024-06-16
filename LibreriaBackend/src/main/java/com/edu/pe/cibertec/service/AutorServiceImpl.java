@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.edu.pe.cibertec.entity.Autor;
 import com.edu.pe.cibertec.repository.IAutorRepository;
-import com.edu.pe.cibertec.repositoryService.IAutorService;
 
 @Service
-public class AutorService implements IAutorService {
+public class AutorServiceImpl implements AutorService {
 
 	@Autowired
 	private IAutorRepository data;

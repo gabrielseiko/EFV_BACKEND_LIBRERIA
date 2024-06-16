@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,4 +38,5 @@ public class Libro {
     @ManyToOne
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
+   
 }

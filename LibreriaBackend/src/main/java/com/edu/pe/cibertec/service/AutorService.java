@@ -1,11 +1,11 @@
-package com.edu.pe.cibertec.repositoryService;
+package com.edu.pe.cibertec.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.edu.pe.cibertec.entity.Autor;
 
-public interface IAutorService {
+public interface AutorService {
 
 	public List<Autor> ListadoAutores();
 	public Optional<Autor> BuscarAutor(int id);
