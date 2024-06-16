@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edu.pe.cibertec.entity.Autor;
-
 import com.edu.pe.cibertec.service.AutorServiceImpl;
 
 
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 public class AutorController {
 
 	@Autowired
-
 	private AutorServiceImpl servicio;
 
 

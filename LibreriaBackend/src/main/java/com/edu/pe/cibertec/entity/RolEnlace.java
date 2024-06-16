@@ -12,12 +12,14 @@ import lombok.Data;
 @Table(name = "tbl_rol_enlace")
 public class RolEnlace {
 
-	@EmbeddedId
-	private RolEnlacePk id;
-	
-	@ManyToOne
-	@JoinColumn(name = "idEnlace", insertable = false, updatable = false, referencedColumnName = "idEnlace")
-	private Enlace enlace;
-	
-	
+	 @EmbeddedId
+	    private RolEnlacePk id;
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "idEnlace", insertable = false, updatable = false, referencedColumnName = "idEnlace")
+	    private Enlace enlace;
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "idRol", insertable = false, updatable = false, referencedColumnName = "idRol")
+	    private Rol rol;
 }

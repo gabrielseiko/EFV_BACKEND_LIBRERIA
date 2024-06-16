@@ -8,5 +8,6 @@ import com.edu.pe.cibertec.entity.Autor;
 @Repository
 public interface AutorRepository extends JpaRepository<Autor, Integer> {
 
+
 	
 }
