@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface ComentarioService {
 
-    List<Comentario> ListadoComentarios();
-    Optional<Comentario> BuscarComentario(int id);
-    int Grabar(Comentario objC);
-    void Suprimir(int id);
+	public abstract List<Comentario> listarComentarios();
+	public abstract Optional<Comentario> buscarComentario(int id);
+	public abstract Comentario registrar(Comentario objComentario);
+	public abstract void eliminarComentario(int id);
 }

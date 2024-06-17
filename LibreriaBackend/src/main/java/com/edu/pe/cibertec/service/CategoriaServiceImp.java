@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class CategoriaServiceImp implements CategoriaService{
 	@Override
 	public void eliminaCategoria(int id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public Optional<Categoria> buscarCategoria(int id) {
+		return repository.findById(id);
 	}
 	
 }

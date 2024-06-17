@@ -7,8 +7,8 @@ import com.edu.pe.cibertec.entity.Autor;
 
 public interface AutorService {
 
-	public List<Autor> ListadoAutores();
-	public Optional<Autor> BuscarAutor(int id);
-	public int Grabar(Autor objA);
-	public void Suprimir(int id);
+	public abstract List<Autor> listadoAutores();
+	public abstract Optional<Autor> buscarAutor(int id);
+	public abstract Autor registrar(Autor objAutor);
+	public abstract void eliminarAutor(int id);
 }

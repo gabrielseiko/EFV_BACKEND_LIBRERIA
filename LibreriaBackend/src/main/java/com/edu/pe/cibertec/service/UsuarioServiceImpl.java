@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.pe.cibertec.entity.Usuario;
-import com.edu.pe.cibertec.repository.IUsuarioRepository;
+import com.edu.pe.cibertec.repository.UsuarioRepository;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
-	private IUsuarioRepository repository;
+	private UsuarioRepository repository;
 	
 	@Override
 	public Usuario registrar(Usuario objUsuario) {
