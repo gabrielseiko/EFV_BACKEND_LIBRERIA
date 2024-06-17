@@ -10,16 +10,16 @@ import com.edu.pe.cibertec.entity.Enlace;
 import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
 
-public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	@Query("Select r from Rol r, UsuarioHasRol u where r.idRol = u.rol.idRol and u.usuario.idUsuario = ?1")
 	public abstract List<Rol> traerRolesDeUsuario(int idUsuario);
 
-	@Query("SELECT DISTINCT e FROM Enlace e " +
-		       "JOIN RolEnlace re ON e.idEnlace = re.enlace.idEnlace " +
-		       "JOIN Rol r ON re.rol.idRol = r.idRol " +
-		       "JOIN UsuarioHasRol u ON r.idRol = u.rol.idRol " +
-		       "WHERE u.usuario.idUsuario = :idUsuario")
+	@Query("SELECT DISTINCT e FROM Enlace e " + 
+		   "JOIN RolEnlace re ON e.idEnlace = re.enlace.idEnlace " + 
+		   "JOIN Rol r ON re.rol.idRol = r.idRol " +
+		   "JOIN UsuarioHasRol u ON r.idRol = u.rol.idRol " +
+		   "WHERE u.usuario.idUsuario = :idUsuario")
 		List<Enlace> traerEnlacesDeUsuario(@Param("idUsuario") int idUsuario);
 
 

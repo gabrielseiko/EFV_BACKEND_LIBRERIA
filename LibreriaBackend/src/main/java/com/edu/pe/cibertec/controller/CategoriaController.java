@@ -3,6 +3,7 @@ package com.edu.pe.cibertec.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.pe.cibertec.entity.Categoria;
+import com.edu.pe.cibertec.entity.Usuario;
 import com.edu.pe.cibertec.service.CategoriaService;
 import com.edu.pe.cibertec.util.AppSettings;
 
@@ -35,6 +37,24 @@ public class CategoriaController {
 		List<Categoria> lstSalida = categoriaService.listaCategoria();
 		return ResponseEntity.ok(lstSalida);
 	}
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> buscarCategoria(@PathVariable("id") int idCategoria) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Optional<Categoria> optionalCategoria = categoriaService.buscarCategoria(idCategoria);
+	        if (optionalCategoria.isPresent()) {
+	            salida.put("categoria", optionalCategoria.get());
+	        } else {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	           }
+	   } catch (Exception e) {
+	       e.printStackTrace();
+	       salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	    }
+	   return ResponseEntity.ok(salida);
+	 }
 	
 	@GetMapping("/listaCategoriaPorDescripcionLike/{var}")
 	@ResponseBody

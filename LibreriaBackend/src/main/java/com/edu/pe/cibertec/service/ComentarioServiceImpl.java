@@ -9,24 +9,30 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ComentarioServiceImpl {
+public class ComentarioServiceImpl implements ComentarioService{
 
     @Autowired
-    private ComentarioRepository comentarioRepository;
+    private ComentarioRepository repository;
 
-    public List<Comentario> getAllComentarios() {
-        return comentarioRepository.findAll();
-    }
+	@Override
+	public List<Comentario> listarComentarios() {
+		return repository.findAll();
+	}
 
-    public Optional<Comentario> getComentarioById(int id) {
-        return comentarioRepository.findById(id);
-    }
+	@Override
+	public Optional<Comentario> buscarComentario(int id) {
+		return repository.findById(id);
+	}
 
-    public Comentario saveComentario(Comentario comentario) {
-        return comentarioRepository.save(comentario);
-    }
+	@Override
+	public Comentario registrar(Comentario objComentario) {
+		return  repository.save(objComentario);
+	}
 
-    public void deleteComentario(int id) {
-        comentarioRepository.deleteById(id);
-    }
+	@Override
+	public void eliminarComentario(int id) {
+		repository.deleteById(id);
+	}
+
+   
 }
