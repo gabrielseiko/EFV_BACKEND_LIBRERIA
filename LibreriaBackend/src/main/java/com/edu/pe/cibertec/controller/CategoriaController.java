@@ -26,7 +26,7 @@ import com.edu.pe.cibertec.util.AppSettings;
 
 @RestController
 @RequestMapping("/url/categoria")
-//@CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
+@CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
 public class CategoriaController {
 	
 	@Autowired

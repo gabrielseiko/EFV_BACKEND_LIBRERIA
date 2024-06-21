@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,21 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.pe.cibertec.entity.Libro;
-
 import com.edu.pe.cibertec.entity.LibroReserva;
 import com.edu.pe.cibertec.entity.LibroVenta;
 import com.edu.pe.cibertec.service.LibroReservaService;
-
-import com.edu.pe.cibertec.entity.Usuario;
-import com.edu.pe.cibertec.service.CategoriaService;
-
 import com.edu.pe.cibertec.service.LibroService;
 import com.edu.pe.cibertec.service.LibroVentaService;
 import com.edu.pe.cibertec.util.AppSettings;
 
 @RestController
 @RequestMapping("/url/libro")
-//@CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
+@CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
 public class LibroController {
 
 	@Autowired
@@ -62,7 +58,7 @@ public class LibroController {
 	}
 
 
-	
+	//Busca libro por Id
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> buscaLibro(@PathVariable("id") int idLibro){
@@ -72,16 +68,17 @@ public class LibroController {
 	        if (optionalLibro.isPresent()) {
 	            salida.put("libro", optionalLibro.get());
 	        } else {
-	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	            salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
 	           }
 	   } catch (Exception e) {
 	       e.printStackTrace();
-	       salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	       salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
 	    }
 	   return ResponseEntity.ok(salida);	
 	}
 	
 
+	// lista libro por titulo
 	@GetMapping("/listaLibroPorTituloLike/{var}")
 	@ResponseBody
 	public ResponseEntity<?> listaLibroPorTituloLike(@PathVariable("var") String titulo) {
@@ -233,14 +230,8 @@ public class LibroController {
 		return ResponseEntity.ok(salida);
 	}
 
-	// Valida idLibro en libroReserva
-	@GetMapping("validarLibroReserva/{idLibro}")
-	public Optional<LibroReserva> validarLibroReserva(@PathVariable int idLibro) {
-		return reservaService.validacionLibroReserva(idLibro);
-	}
 
 	// LIBRO VENTA
-
 	// Listar libros
 	@GetMapping("/venta")
 	public ResponseEntity<List<LibroVenta>> listaVenta() {
@@ -309,12 +300,6 @@ public class LibroController {
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
 		}
 		return ResponseEntity.ok(salida);
-	}
-
-	// Valida idLibro en libroVenta
-	@GetMapping("validarLibroVenta/{idLibro}")
-	public Optional<LibroVenta> validarLibroVenta(@PathVariable int idLibro) {
-		return ventaService.validacionLibroVenta(idLibro);
 	}
 
 }
