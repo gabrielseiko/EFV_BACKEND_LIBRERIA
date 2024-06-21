@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class LibroReservaServiceImp implements LibroReservaService {
 	public void eliminaLibroReserva(int id) {
 		repository.deleteById(id);
 	}
-	
+
+	@Override
+	public Optional<LibroReserva> validacionLibroReserva(int idLibro) {
+		return repository.validacionLibroReserva(idLibro);
+	}
+
 }

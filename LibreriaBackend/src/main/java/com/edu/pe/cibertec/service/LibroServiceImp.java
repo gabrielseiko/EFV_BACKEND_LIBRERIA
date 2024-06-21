@@ -41,6 +41,11 @@ public class LibroServiceImp implements LibroService{
 	}
 
 	@Override
+	public List<Libro> listaLibrosPorCategoria(int idCategoria) {
+		return repository.listaLibrosPorCategoria(idCategoria);
+	}
+
+	@Override
 	public Optional<Libro> buscaLibro(int id) {
 		return repository.findById(id);
 	}

@@ -19,6 +19,8 @@ public class AppSettings {
 	public static final String MENSAJE_ELI_ERROR = "No se eliminó, ya que el registro esta relacionado.";
 	public static final String MENSAJE_ELI_EXITOSO = "Se eliminó correctamente.";
 	public static final String MENSAJE_ELI_NO_EXISTE_ID = "No existe el ID que se desea eliminar.";
+	
+	public static final String MENSAJE_NO_EXISTE_ID = "No existe el ID que desea buscar.";
 
 	public static final String MENSAJE_DNI_YA_EXISTE = "Ya existe el DNI : ";
 
