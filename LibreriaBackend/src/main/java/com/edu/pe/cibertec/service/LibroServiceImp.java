@@ -39,4 +39,9 @@ public class LibroServiceImp implements LibroService{
 		repository.deleteById(id);		
 	}
 
+	@Override
+	public List<Libro> listaLibrosPorcategoria(int idCategoria) {
+		return repository.listaLibrosPorcategoria(idCategoria);
+	}
+
 }
