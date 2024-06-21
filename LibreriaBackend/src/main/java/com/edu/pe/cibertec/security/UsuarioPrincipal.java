@@ -27,8 +27,8 @@ public class UsuarioPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	private int idUsuario;
-	private String login;
-	private String password;
+	private String user;
+	private String contrasenia;
 	private String nombreUsuario;
 	private static String nombreCompleto;
 	private Collection<? extends GrantedAuthority> authorities;
@@ -51,12 +51,12 @@ public class UsuarioPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return password;
+		return contrasenia;
 	}
 
 	@Override
 	public String getUsername() {
-		return login;
+		return user;
 	}
 
 	@Override

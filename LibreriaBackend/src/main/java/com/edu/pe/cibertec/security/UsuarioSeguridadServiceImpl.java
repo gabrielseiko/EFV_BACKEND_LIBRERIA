@@ -26,11 +26,11 @@ public class UsuarioSeguridadServiceImpl implements UserDetailsService {
 	private UsuarioRepository usuarioRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		log.info(">>>loadUserByUsername >>> " + login);
+	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
+		log.info(">>>loadUserByUsername >>> " + user);
 		UserDetails userDetails = null;
 		try {
-			Usuario objUsuario = usuarioRepository.findByUser(login);
+			Usuario objUsuario = usuarioRepository.findByUser(user);
 			if (objUsuario != null) {
 				log.info("==> Login =========== " + objUsuario);
 

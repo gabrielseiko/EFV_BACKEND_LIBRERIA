@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/autorlibros")
+@RequestMapping("/url/autorlibros")
 public class AutorLibroController {
 
     @Autowired
