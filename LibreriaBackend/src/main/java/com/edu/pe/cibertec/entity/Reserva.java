@@ -23,8 +23,8 @@ public class Reserva {
     private int idPrestamo;
 
     @ManyToOne
-    @JoinColumn(name = "idLibro")
-    private Libro libro;
+    @JoinColumn(name = "idLibroReserva")
+    private LibroReserva libro;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
