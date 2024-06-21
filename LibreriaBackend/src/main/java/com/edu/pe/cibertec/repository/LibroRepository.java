@@ -15,6 +15,6 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	@Query("select l from Libro l where l.titulo like ?1")
 	public abstract List<Libro> listaLibroPorTituloLike(String titulo);
 	
-	@Query("select l from Libro l where l.categoria.idcategoria = :idCategoria")
-	public abstract List<Libro> listaLibrosPorcategoria(@Param("idCategoria")int idCategoria);
+	@Query("select l from Libro l where l.categoria.idCategoria = :idCategoria")
+	public abstract List<Libro> listaLibrosPorCategoria(@Param("idCategoria")int idCategoria);
 }

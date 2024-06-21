@@ -54,7 +54,7 @@ public class LibroController {
 	@GetMapping("/listaLibrosPorCategoria/{categoria}")
 	@ResponseBody
 	public List<Libro> verLibrosPorCategoria(@PathVariable("categoria") int idCategoria) {
-		return libroService.listaLibrosPorcategoria(idCategoria);
+		return libroService.listaLibrosPorCategoria(idCategoria);
 	}
 
 	@GetMapping("/listaLibroPorTituloLike/{var}")
@@ -127,7 +127,7 @@ public class LibroController {
 
 	// Valida titulo de libro
 	@GetMapping("/validaTituloRegistra")
-	public String validaTitulo(@RequestParam(name = "descripcion") String titulo) {
+	public String validaTitulo(@RequestParam(name = "titulo") String titulo) {
 		List<Libro> lstSalida = libroService.listaLibroPorTituloIgual(titulo);
 		if (lstSalida.isEmpty()) {
 			return "{\"valid\":true}";
@@ -138,6 +138,13 @@ public class LibroController {
 	}
 
 	// LIBRO RESERVA
+	// Listar libros reserva
+	@GetMapping("/reserva")
+	public ResponseEntity<List<LibroReserva>> listaReserva() {
+		List<LibroReserva> lstSalida = reservaService.listaLibroReserva();
+		return ResponseEntity.ok(lstSalida);
+	}
+
 	// Registra libro reserva
 	@PostMapping("/registraLibroReserva")
 	@ResponseBody
@@ -208,6 +215,14 @@ public class LibroController {
 	}
 
 	// LIBRO VENTA
+
+	// Listar libros
+	@GetMapping("/venta")
+	public ResponseEntity<List<LibroVenta>> listaVenta() {
+		List<LibroVenta> lstSalida = ventaService.listaLibroVenta();
+		return ResponseEntity.ok(lstSalida);
+	}
+
 	// Registra libro venta
 	@PostMapping("/registraLibroVenta")
 	@ResponseBody

@@ -40,8 +40,8 @@ public class LibroServiceImp implements LibroService{
 	}
 
 	@Override
-	public List<Libro> listaLibrosPorcategoria(int idCategoria) {
-		return repository.listaLibrosPorcategoria(idCategoria);
+	public List<Libro> listaLibrosPorCategoria(int idCategoria) {
+		return repository.listaLibrosPorCategoria(idCategoria);
 	}
 
 }
