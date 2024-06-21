@@ -55,24 +55,24 @@ public class UsuarioController {
 	 }
 	
 	@PostMapping("/registrarUsuario")
-	@ResponseBody
-	public ResponseEntity<?> registrarUsuario(@RequestBody Usuario objUsuario) {
-		Map<String, Object> salida = new HashMap<>();
-		try {
-			objUsuario.setIdUsuario(0);
-			
-			Usuario objSalida = usuarioService.registrar(objUsuario);
-			if (objSalida == null) {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
-			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
-		}
-		return ResponseEntity.ok(salida);
-	}
+    @ResponseBody
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario objUsuario) {
+        Map<String, Object> salida = new HashMap<>();
+        try {
+            objUsuario.setIdUsuario(0);
+
+            Usuario objSalida = usuarioService.registrar(objUsuario);
+            if (objSalida == null) {
+                salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+            } else {
+                salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+        }
+        return ResponseEntity.ok(salida);
+    }
 	
 	@PutMapping("/actualizarUsuario")
 	@ResponseBody

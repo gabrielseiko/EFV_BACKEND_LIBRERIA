@@ -21,8 +21,8 @@ public class DetalleVenta {
     private Integer idDetalle;
 	
 	@ManyToOne
-    @JoinColumn(name = "idLibro", referencedColumnName = "idLibro")
-    private Libro libro;
+    @JoinColumn(name = "idLibroVenta", referencedColumnName = "idLibroVenta")
+    private LibroVenta libro;
 	
 	@Column(name = "cantidad")
 	private int cantidad;
