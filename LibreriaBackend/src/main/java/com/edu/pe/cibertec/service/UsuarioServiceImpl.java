@@ -45,6 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
+
     public Usuario buscaPorLogin(String user) {
         return repository.findByUser(user);
     }
@@ -58,4 +59,5 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Rol> traerRolesDeUsuario(int idUsuario) {
 		return repository.traerRolesDeUsuario(idUsuario);
 	}
+
 }
