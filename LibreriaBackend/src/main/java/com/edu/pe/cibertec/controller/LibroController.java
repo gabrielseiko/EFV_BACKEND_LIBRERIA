@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.pe.cibertec.entity.Categoria;
 import com.edu.pe.cibertec.entity.Libro;
 import com.edu.pe.cibertec.entity.LibroReserva;
 import com.edu.pe.cibertec.entity.LibroVenta;
-import com.edu.pe.cibertec.service.CategoriaService;
 import com.edu.pe.cibertec.service.LibroReservaService;
 import com.edu.pe.cibertec.service.LibroService;
 import com.edu.pe.cibertec.service.LibroVentaService;
