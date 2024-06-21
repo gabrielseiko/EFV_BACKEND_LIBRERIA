@@ -17,7 +17,7 @@ import lombok.ToString;
 public class JwtDto {
     private String token;
     private String bearer = "Bearer";
-    private String login;
+    private String user;
     private String nombreCompleto;
     private int idUsuario;
     private Collection<? extends GrantedAuthority> authorities;
@@ -25,7 +25,7 @@ public class JwtDto {
 
     public JwtDto(String token,String login, String nombreCompleto, int idUsuario, Collection<? extends GrantedAuthority> authorities,List<Enlace> lstOpciones) {
         this.token = token;
-        this.login = login;
+        this.user = login;
         this.nombreCompleto = nombreCompleto;
         this.authorities = authorities;
         this.idUsuario = idUsuario;

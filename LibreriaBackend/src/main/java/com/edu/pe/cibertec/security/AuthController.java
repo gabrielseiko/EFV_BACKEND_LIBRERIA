@@ -32,9 +32,9 @@ public class AuthController {
     
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@RequestBody LoginUsuario loginUsuario){
-    	log.info(">>> login >>> " + loginUsuario.getLogin());
-    	log.info(">>> login >>> " + loginUsuario.getPassword());
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getLogin(), loginUsuario.getPassword()));
+    	log.info(">>> login >>> " + loginUsuario.getUser());
+    	log.info(">>> login >>> " + loginUsuario.getContrasenia());
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getUser(), loginUsuario.getContrasenia()));
         
         log.info(">>> authentication >>> " + authentication);
         log.info(">>> Inicio de Generacion de Token ");

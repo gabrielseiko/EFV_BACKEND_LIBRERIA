@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.edu.pe.cibertec.entity.Enlace;
+import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
 import com.edu.pe.cibertec.repository.UsuarioRepository;
 
@@ -43,7 +45,17 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario buscaPorLogin(String login) {
-        return repository.findByUser(login);
+    public Usuario buscaPorLogin(String user) {
+        return repository.findByUser(user);
     }
+
+	@Override
+	public List<Enlace> traerEnlacesDeUsuario(int idUsuario) {
+		return repository.traerEnlacesDeUsuario(idUsuario);
+	}
+
+	@Override
+	public List<Rol> traerRolesDeUsuario(int idUsuario) {
+		return repository.traerRolesDeUsuario(idUsuario);
+	}
 }
