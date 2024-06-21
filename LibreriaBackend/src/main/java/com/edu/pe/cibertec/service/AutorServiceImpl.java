@@ -13,30 +13,27 @@ import com.edu.pe.cibertec.repository.AutorRepository;
 public class AutorServiceImpl implements AutorService {
 
 	@Autowired
-	private AutorRepository data;
+	private AutorRepository repository;
+
+	@Override
+	public List<Autor> listadoAutores() {
+		return repository.findAll();
+	}
+
+	@Override
+	public Optional<Autor> buscarAutor(int id) {
+		return repository.findById(id);
+	}
+
+	@Override
+	public Autor registrar(Autor objAutor) {
+		return repository.save(objAutor);
+	}
+
+	@Override
+	public void eliminarAutor(int id) {
+		repository.deleteById(id);
+	}
 	
-	@Override
-	public List<Autor> ListadoAutores() {
-		return (List<Autor>) data.findAll();
-	}
-
-	@Override
-	public Optional<Autor> BuscarAutor(int id) {
-		return data.findById(id);
-	}
-
-	@Override
-	public int Grabar(Autor objA) {
-		int rpta = 0;
-		Autor a = data.save(objA);
-		if (!a.equals(null))
-			rpta = 1;
-		return rpta;
-	}
-
-	@Override
-	public void Suprimir(int id) {
-		data.deleteById(id);
-	}
 
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.edu.pe.cibertec.entity.Enlace;
 import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
-import com.edu.pe.cibertec.repository.IUsuarioRepository;
+import com.edu.pe.cibertec.repository.UsuarioRepository;
 
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -23,7 +23,7 @@ import lombok.extern.apachecommons.CommonsLog;
 public class UsuarioSeguridadServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private IUsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

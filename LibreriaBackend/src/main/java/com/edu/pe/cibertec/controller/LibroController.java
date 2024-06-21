@@ -19,9 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.pe.cibertec.entity.Libro;
+
 import com.edu.pe.cibertec.entity.LibroReserva;
 import com.edu.pe.cibertec.entity.LibroVenta;
 import com.edu.pe.cibertec.service.LibroReservaService;
+
+import com.edu.pe.cibertec.entity.Usuario;
+import com.edu.pe.cibertec.service.CategoriaService;
+
 import com.edu.pe.cibertec.service.LibroService;
 import com.edu.pe.cibertec.service.LibroVentaService;
 import com.edu.pe.cibertec.util.AppSettings;
@@ -48,12 +53,34 @@ public class LibroController {
 		return ResponseEntity.ok(lstSalida);
 	}
 
+
 	// Lista libros por categoria
 	@GetMapping("/listaLibrosPorCategoria/{categoria}")
 	@ResponseBody
 	public List<Libro> verLibrosPorCategoria(@PathVariable("categoria") int idCategoria) {
 		return libroService.listaLibrosPorCategoria(idCategoria);
 	}
+
+
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> buscaLibro(@PathVariable("id") int idLibro){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Optional<Libro> optionalLibro = libroService.buscaLibro(idLibro);
+	        if (optionalLibro.isPresent()) {
+	            salida.put("libro", optionalLibro.get());
+	        } else {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	           }
+	   } catch (Exception e) {
+	       e.printStackTrace();
+	       salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	    }
+	   return ResponseEntity.ok(salida);	
+	}
+	
 
 	@GetMapping("/listaLibroPorTituloLike/{var}")
 	@ResponseBody

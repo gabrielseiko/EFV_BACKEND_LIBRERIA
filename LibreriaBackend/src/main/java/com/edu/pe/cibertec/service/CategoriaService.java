@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.edu.pe.cibertec.entity.Categoria;
 
@@ -18,5 +19,6 @@ public interface CategoriaService {
 
 	public abstract List<Categoria> listaCategoria();
 
+	public abstract Optional<Categoria> buscarCategoria(int id);
 
 }

@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,35 +18,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.pe.cibertec.entity.Autor;
-import com.edu.pe.cibertec.service.AutorServiceImpl;
+import com.edu.pe.cibertec.entity.Reserva;
+import com.edu.pe.cibertec.service.ReservaService;
 import com.edu.pe.cibertec.util.AppSettings;
 
-import org.springframework.ui.Model;
-
 @RestController
-@RequestMapping("/url/autor")
+@RequestMapping("/url/reserva")
 @CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
-public class AutorController {
+public class ReservaController {
 
 	@Autowired
-	private AutorServiceImpl autorService;
-
-	//LISTADO DE AUTORES
+	private ReservaService reservaService;
+	
 	@GetMapping
-	public ResponseEntity<List<Autor>> listarAutores(){
-		List<Autor> salida = autorService.listadoAutores();
+	public ResponseEntity<List<Reserva>> listarReservas(){
+		List<Reserva> salida = reservaService.listarReservas();
 		return ResponseEntity.ok(salida);
 	}
 	
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> buscarAutor(@PathVariable("id") int idAutor) {
+	public ResponseEntity<Map<String, Object>> buscarReserva(@PathVariable("id") int idReserva) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Optional<Autor> optionalAutor = autorService.buscarAutor(idAutor);
-	        if (optionalAutor.isPresent()) {
-	            salida.put("Autor", optionalAutor.get());
+			Optional<Reserva> optionalReserva = reservaService.buscarReserva(idReserva);
+	        if (optionalReserva.isPresent()) {
+	            salida.put("reserva", optionalReserva.get());
 	        } else {
 	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 	           }
@@ -58,14 +54,14 @@ public class AutorController {
 	   return ResponseEntity.ok(salida);
 	 }
 	
-	@PostMapping("/registrarAutor")
+	@PostMapping("/registrarReserva")
 	@ResponseBody
-	public ResponseEntity<?> registrarAutor(@RequestBody Autor objAutor) {
+	public ResponseEntity<?> registrarReserva(@RequestBody Reserva objReserva) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			objAutor.setIdAutor(0);
+			objReserva.setIdPrestamo(0);
 			
-			Autor objSalida = autorService.registrar(objAutor);
+			Reserva objSalida = reservaService.registrar(objReserva);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
@@ -78,13 +74,13 @@ public class AutorController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualizarAutor")
+	@PutMapping("/actualizarReserva")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualizaAutor(@RequestBody Autor objAutor) {
+	public ResponseEntity<Map<String, Object>> actualizarReserva(@RequestBody Reserva objReserva) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 
-			Autor objSalida = autorService.registrar(objAutor);
+			Reserva objSalida = reservaService.registrar(objReserva);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
@@ -97,12 +93,12 @@ public class AutorController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@DeleteMapping("/eliminarAutor/{id}")
+	@DeleteMapping("/eliminarReserva/{id}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> eliminarAutor(@PathVariable("id") int idAutor) {
+	public ResponseEntity<Map<String, Object>> eliminarReserva(@PathVariable("id") int idReserva) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			autorService.eliminarAutor(idAutor);
+			reservaService.eliminarReserva(idReserva);
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
 		} catch (Exception e) {
 			e.printStackTrace();

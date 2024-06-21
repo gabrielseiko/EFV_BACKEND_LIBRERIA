@@ -1,6 +1,7 @@
 package com.edu.pe.cibertec.service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 import com.edu.pe.cibertec.entity.Libro;
@@ -21,4 +22,5 @@ public interface LibroService {
 
 	public abstract List<Libro> listaLibro();
 
+	public abstract Optional<Libro> buscaLibro(int id);
 }

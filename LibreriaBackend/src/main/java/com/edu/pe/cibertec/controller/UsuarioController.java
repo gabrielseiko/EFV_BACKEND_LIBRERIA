@@ -23,39 +23,40 @@ import com.edu.pe.cibertec.service.UsuarioService;
 import com.edu.pe.cibertec.util.AppSettings;
 
 @RestController
-@RequestMapping("/url/crudUsuario")
+@RequestMapping("/url/usuario")
+@CrossOrigin(AppSettings.URL_CROSS_ORIGIN)
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/listadoUsuario")
-	@ResponseBody
-	public List<Usuario> listaUsuarios(){
-		return usuarioService.listarUsuarios();
+	@GetMapping
+	public ResponseEntity<List<Usuario>> listarUsuarios(){
+		List<Usuario> salida = usuarioService.listarUsuarios();
+		return ResponseEntity.ok(salida);
 	}
 	
-	 @GetMapping("/buscaUsuario/{id}")
-	    @ResponseBody
-	    public ResponseEntity<Map<String, Object>> buscaUsuario(@PathVariable("id") int idUsuario) {
-	        Map<String, Object> salida = new HashMap<>();
-	        try {
-	            Optional<Usuario> optionalUsuario = usuarioService.buscarUsuario(idUsuario);
-	            if (optionalUsuario.isPresent()) {
-	                salida.put("usuario", optionalUsuario.get());
-	            } else {
-	                salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
-	        }
-	        return ResponseEntity.ok(salida);
-	    }
-	
-	@PostMapping("/registraUsuario")
+	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<?> insertaEjemplo(@RequestBody Usuario objUsuario) {
+	public ResponseEntity<Map<String, Object>> buscarUsuario(@PathVariable("id") int idUsuario) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Optional<Usuario> optionalUsuario = usuarioService.buscarUsuario(idUsuario);
+	        if (optionalUsuario.isPresent()) {
+	            salida.put("usuario", optionalUsuario.get());
+	        } else {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	           }
+	   } catch (Exception e) {
+	       e.printStackTrace();
+	       salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	    }
+	   return ResponseEntity.ok(salida);
+	 }
+	
+	@PostMapping("/registrarUsuario")
+	@ResponseBody
+	public ResponseEntity<?> registrarUsuario(@RequestBody Usuario objUsuario) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			objUsuario.setIdUsuario(0);
@@ -73,9 +74,9 @@ public class UsuarioController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualizaEjemplo")
+	@PutMapping("/actualizarUsuario")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualizaUsuario(@RequestBody Usuario objUsuario) {
+	public ResponseEntity<Map<String, Object>> actualizarUsuario(@RequestBody Usuario objUsuario) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 
@@ -92,9 +93,9 @@ public class UsuarioController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@DeleteMapping("/eliminaUsuario/{id}")
+	@DeleteMapping("/eliminarUsuario/{id}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> eliminaEjemplo(@PathVariable("id") int idUsuario) {
+	public ResponseEntity<Map<String, Object>> eliminarUsuario(@PathVariable("id") int idUsuario) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			usuarioService.eliminarUsuario(idUsuario);
