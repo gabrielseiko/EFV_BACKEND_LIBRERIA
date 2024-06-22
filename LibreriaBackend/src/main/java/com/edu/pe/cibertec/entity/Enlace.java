@@ -24,4 +24,7 @@ public class Enlace {
     
     @Column(name = "ruta")
     private String ruta;
+    
+    @Column(name = "tipo")
+    private int tipo;
 }

@@ -15,5 +15,5 @@ public interface UsuarioService {
 	public abstract List<Usuario> listarUsuarios();
 	public abstract Optional<Usuario> buscarUsuario(int id);
 	public abstract void eliminarUsuario(int id);
-	public abstract Usuario buscaPorLogin(String login);
+	public abstract Usuario buscaPorLogin(String user);
 }
