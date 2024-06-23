@@ -49,7 +49,6 @@ public class LibroController {
 		return ResponseEntity.ok(lstSalida);
 	}
 
-
 	// Lista libros por categoria
 	@GetMapping("/listaLibrosPorCategoria/{categoria}")
 	@ResponseBody
@@ -57,26 +56,24 @@ public class LibroController {
 		return libroService.listaLibrosPorCategoria(idCategoria);
 	}
 
-
-	//Busca libro por Id
+	// Busca libro por Id
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> buscaLibro(@PathVariable("id") int idLibro){
+	public ResponseEntity<Map<String, Object>> buscaLibro(@PathVariable("id") int idLibro) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			Optional<Libro> optionalLibro = libroService.buscaLibro(idLibro);
-	        if (optionalLibro.isPresent()) {
-	            salida.put("libro", optionalLibro.get());
-	        } else {
-	            salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
-	           }
-	   } catch (Exception e) {
-	       e.printStackTrace();
-	       salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
-	    }
-	   return ResponseEntity.ok(salida);	
+			if (optionalLibro.isPresent()) {
+				salida.put("libro", optionalLibro.get());
+			} else {
+				salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", AppSettings.MENSAJE_NO_EXISTE_ID);
+		}
+		return ResponseEntity.ok(salida);
 	}
-	
 
 	// lista libro por titulo
 	@GetMapping("/listaLibroPorTituloLike/{var}")
@@ -103,7 +100,7 @@ public class LibroController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO + " Libro de ID ==> " + obj.getIdLibro() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,7 +120,7 @@ public class LibroController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO + " Libro de ID ==> " + obj.getIdLibro() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,7 +136,7 @@ public class LibroController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			libroService.eliminaLibro(idLibro);
-			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
+			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO + " Libro de ID ==> " + idLibro + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
@@ -147,10 +144,23 @@ public class LibroController {
 		return ResponseEntity.ok(salida);
 	}
 
-	// Valida titulo de libro
+	// Valida titulo no se repita registro
 	@GetMapping("/validaTituloRegistra")
 	public String validaTitulo(@RequestParam(name = "titulo") String titulo) {
 		List<Libro> lstSalida = libroService.listaLibroPorTituloIgual(titulo);
+		if (lstSalida.isEmpty()) {
+			return "{\"valid\":true}";
+		} else {
+			return "{\"valid\":false}";
+		}
+
+	}
+
+	// Valida titulo no se repita actualizacion
+	@GetMapping("/validaTituloActualiza")
+	public String validaTitulo(@RequestParam(name = "titulo") String titulo,
+			@RequestParam(name = "idLibro") int idLibro) {
+		List<Libro> lstSalida = libroService.listaLibroPorTituloIgualActualiza(titulo, idLibro);
 		if (lstSalida.isEmpty()) {
 			return "{\"valid\":true}";
 		} else {
@@ -186,7 +196,8 @@ public class LibroController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+				salida.put("mensaje",
+						AppSettings.MENSAJE_REG_EXITOSO + " Libro Reserva de ID ==> " + obj.getIdLibroReserva() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,13 +211,22 @@ public class LibroController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaLibroReserva(@RequestBody LibroReserva obj) {
 		Map<String, Object> salida = new HashMap<>();
+		// validacion solo 1 resgitro por libro
+		Optional<LibroReserva> libroExiste = reservaService.validacionLibroReservaActualiza(obj.getLibro().getIdLibro(),
+				obj.getIdLibroReserva());
+		if (libroExiste.isPresent()) {
+			salida.put("mensaje", "Error: El libro ya tiene un registro en Libro Reserva.");
+			return ResponseEntity.status(400).body(salida);
+		}
+
 		try {
 
 			LibroReserva objSalida = reservaService.insertaActualizaLibroReserva(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+				salida.put("mensaje",
+						AppSettings.MENSAJE_ACT_EXITOSO + " Libro Reserva de ID ==> " + obj.getIdLibroReserva() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -222,14 +242,13 @@ public class LibroController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			reservaService.eliminaLibroReserva(idLibroReserva);
-			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
+			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO + " Libro Reserva de ID ==> " + idLibroReserva + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
 		}
 		return ResponseEntity.ok(salida);
 	}
-
 
 	// LIBRO VENTA
 	// Listar libros
@@ -258,7 +277,8 @@ public class LibroController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+				salida.put("mensaje",
+						AppSettings.MENSAJE_REG_EXITOSO + " Libro Vanta de ID ==> " + obj.getIdLibroVenta() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -272,13 +292,21 @@ public class LibroController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaLibroVenta(@RequestBody LibroVenta obj) {
 		Map<String, Object> salida = new HashMap<>();
+
+		// validacion solo 1 resgitro por libro
+		Optional<LibroVenta> libroExiste = ventaService.validacionLibroVentaActualiza(obj.getLibro().getIdLibro(), obj.getIdLibroVenta());
+		if (libroExiste.isPresent()) {
+			salida.put("mensaje", "Error: El libro ya tiene un registro en Libro Venta.");
+			return ResponseEntity.status(400).body(salida);
+		}
 		try {
 
 			LibroVenta objSalida = ventaService.insertaActualizaLibroVenta(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+				salida.put("mensaje",
+						AppSettings.MENSAJE_ACT_EXITOSO + " Libro Venta de ID ==> " + obj.getIdLibroVenta() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -294,7 +322,7 @@ public class LibroController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			ventaService.eliminaLibroVenta(idLibroVenta);
-			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
+			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO + " Libro Venta de ID ==> " + idLibroVenta + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);

@@ -9,6 +9,7 @@ public interface CategoriaService {
 
 	// Para Validaciones
 	public abstract List<Categoria> listaCategoriaPorDescripcionIgual(String descripcion);
+	public abstract List<Categoria> listaCategoriaPorDescripcionIgualActualiza(String descripcion, int idCategoria);
 
 	// Para el crud
 	public abstract Categoria insertaActualizaCategoria(Categoria obj);
