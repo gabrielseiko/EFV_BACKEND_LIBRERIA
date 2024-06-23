@@ -12,6 +12,7 @@ public interface LibroService {
 	
 	// Para Validaciones
 	public abstract List<Libro> listaLibroPorTituloIgual(String titulo);
+	public abstract List<Libro> listaLibroPorTituloIgualActualiza(String titulo, int idLibro);
 
 	// Para el crud
 	public abstract Libro insertaActualizaLibro(Libro obj);

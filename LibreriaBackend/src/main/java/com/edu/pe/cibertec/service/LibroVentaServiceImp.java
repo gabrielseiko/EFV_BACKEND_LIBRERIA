@@ -40,4 +40,14 @@ public class LibroVentaServiceImp implements LibroVentaService {
 		return repository.validacionLibroVenta(idLibro);
 	}
 
+	@Override
+	public List<LibroVenta> listaLibroVentaPorLibroIgualActualiza(int idLibro, int idLibroVenta) {
+		return repository.listaLibroVentaPorLibroIgualActualiza(idLibro, idLibroVenta);
+	}
+
+	@Override
+	public Optional<LibroVenta> validacionLibroVentaActualiza(int idLibro, int idLibroVenta) {
+		return repository.validacionLibroVentaActualiza(idLibro, idLibroVenta);
+	}
+
 }

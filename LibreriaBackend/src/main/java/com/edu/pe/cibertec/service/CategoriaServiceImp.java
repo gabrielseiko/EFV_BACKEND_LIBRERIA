@@ -44,5 +44,10 @@ public class CategoriaServiceImp implements CategoriaService{
 	public Optional<Categoria> buscarCategoria(int id) {
 		return repository.findById(id);
 	}
+
+	@Override
+	public List<Categoria> listaCategoriaPorDescripcionIgualActualiza(String descripcion, int idCategoria) {
+		return repository.listaCategoriaPorDescripcionIgualActualiza(descripcion, idCategoria);
+	}
 	
 }

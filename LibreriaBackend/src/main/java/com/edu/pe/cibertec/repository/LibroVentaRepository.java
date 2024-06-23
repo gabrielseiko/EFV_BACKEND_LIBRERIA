@@ -7,13 +7,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.edu.pe.cibertec.entity.LibroReserva;
 import com.edu.pe.cibertec.entity.LibroVenta;
 
 public interface LibroVentaRepository extends JpaRepository<LibroVenta, Integer>{
 	@Query("select l from LibroVenta l where l.libro.idLibro = ?1")
 	public abstract List<LibroVenta> listaLibroVentaPorLibroIgual(int idLibro);
 	
+	@Query("select l from LibroVenta l where l.libro.idLibro = ?1 and l.idLibroVenta != ?2 ")
+	public abstract List<LibroVenta> listaLibroVentaPorLibroIgualActualiza(int idLibro, int idLibroVenta);
+	
 	@Query("select l from  LibroVenta l where l.libro.idLibro = :idLibro")
     Optional<LibroVenta> validacionLibroVenta(@Param("idLibro") int idLibro);
+	
+	@Query("select l from LibroVenta l where l.libro.idLibro = :idLibro and l.idLibroVenta != :idLibroVenta")
+	Optional<LibroVenta> validacionLibroVentaActualiza(@Param("idLibro")int idLibro, @Param("idLibroVenta")int idLibroVenta);
 
 }

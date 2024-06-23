@@ -8,8 +8,9 @@ import com.edu.pe.cibertec.entity.LibroVenta;
 public interface LibroVentaService {
 	// Para Validaciones
 	public abstract List<LibroVenta> listaLibroVentaPorLibroIgual(int idLibro);
-	
+	public abstract List<LibroVenta> listaLibroVentaPorLibroIgualActualiza(int idLibro, int idLibroVenta);
 	Optional<LibroVenta> validacionLibroVenta(int idLibro);
+	Optional<LibroVenta> validacionLibroVentaActualiza(int idLibro, int idLibroVenta);
 
 	// Para el crud
 	public abstract LibroVenta insertaActualizaLibroVenta(LibroVenta obj);

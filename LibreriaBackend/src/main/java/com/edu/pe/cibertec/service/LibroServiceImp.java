@@ -50,4 +50,9 @@ public class LibroServiceImp implements LibroService{
 		return repository.findById(id);
 	}
 
+	@Override
+	public List<Libro> listaLibroPorTituloIgualActualiza(String titulo, int idLibro) {
+		return repository.listaLibroPorTituloIgualActualiza(titulo, idLibro);
+	}
+
 }
