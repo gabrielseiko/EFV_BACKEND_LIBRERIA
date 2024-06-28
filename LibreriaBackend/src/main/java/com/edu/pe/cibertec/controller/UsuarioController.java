@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
+import com.edu.pe.cibertec.entity.UsuarioHasRol;
+import com.edu.pe.cibertec.entity.UsuarioRolPk;
+import com.edu.pe.cibertec.repository.UsuarioRepository;
 import com.edu.pe.cibertec.service.UsuarioService;
 import com.edu.pe.cibertec.util.AppSettings;
 
@@ -29,6 +33,7 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> listarUsuarios(){
@@ -53,7 +58,7 @@ public class UsuarioController {
 	    }
 	   return ResponseEntity.ok(salida);
 	 }
-	
+	//GENERAL
 	@PostMapping("/registrarUsuario")
     @ResponseBody
     public ResponseEntity<?> registrarUsuario(@RequestBody Usuario objUsuario) {
@@ -72,7 +77,7 @@ public class UsuarioController {
             salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
         }
         return ResponseEntity.ok(salida);
-    }
+	}
 	
 	@PutMapping("/actualizarUsuario")
 	@ResponseBody
@@ -105,5 +110,119 @@ public class UsuarioController {
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
 		}
 		return ResponseEntity.ok(salida);
+	}
+	
+	
+	//CRUD TRABAJADOR
+	
+    //LISTAR TODOS LOS TRABAJADORES
+    @GetMapping("/trabajadores")
+    public ResponseEntity<List<Usuario>> listarTrabajadores() {
+        List<Usuario> trabajadores = usuarioService.findAllTrabajadores();
+        return ResponseEntity.ok(trabajadores);
+    }
+	//LISTAR TRABAJADOR DE ADMINISTRADOR
+    @GetMapping("/listarTrabajador/{param}")
+    public ResponseEntity<List<Usuario>> listarTrabajador(@PathVariable("param") int idRecursivo) {
+        List<Usuario> salida = usuarioService.listarTrabajador(idRecursivo);
+        return ResponseEntity.ok(salida);
+    }
+	
+	//REGISTRAR TRABAJADOR
+	@PostMapping("/registrarTrabajador")
+	@ResponseBody
+	public ResponseEntity<?> registrarTrabajador(@RequestBody Usuario objUsuario) {
+	    Map<String, Object> salida = new HashMap<>();
+	    try {
+	        objUsuario.setIdUsuario(0);
+
+	        UsuarioRolPk usuarioRolPk = new UsuarioRolPk();
+	        usuarioRolPk.setIdUsuario(objUsuario.getIdUsuario()); 
+	        usuarioRolPk.setIdRol(2); 
+	        
+	        UsuarioHasRol usuarioHasRol = new UsuarioHasRol();
+	        usuarioHasRol.setId(usuarioRolPk);
+	        
+	        Rol rolTrabajador = new Rol();
+	        rolTrabajador.setIdRol(2); 
+	        
+	        objUsuario.getRoles().add(rolTrabajador);
+	        
+	        Usuario objSalida = usuarioService.registrar(objUsuario);
+	        
+	        if (objSalida == null) {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	        } else {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	    }
+	    return ResponseEntity.ok(salida);
+	}
+
+	//ACTUALIZAR TRABAJADOR
+	@PutMapping("/actualizarTrabajador")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizarTrabajador(@RequestBody Usuario objUsuario) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+
+			Usuario objSalida = usuarioService.registrar(objUsuario);
+			if (objSalida == null) {
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
+			} else {
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
+		}
+		return ResponseEntity.ok(salida);
+	}	
+	
+	
+	//CRUD CLIENTE
+	
+	//LISTAR TODOS LOS CLIENTES
+    @GetMapping("/clientes")
+    public ResponseEntity<List<Usuario>> listarClientes() {
+        List<Usuario> clientes = usuarioService.listarClientes();
+        return ResponseEntity.ok(clientes);
+    }
+	
+   //REGISTRAR CLIENTE
+	@PostMapping("/registrarCliente")
+	@ResponseBody
+	public ResponseEntity<?> registrarCliente(@RequestBody Usuario objUsuario) {
+	    Map<String, Object> salida = new HashMap<>();
+	    try {
+	        objUsuario.setIdUsuario(0);
+
+	        UsuarioRolPk usuarioRolPk = new UsuarioRolPk();
+	        usuarioRolPk.setIdUsuario(objUsuario.getIdUsuario()); 
+	        usuarioRolPk.setIdRol(3); 
+	        
+	        UsuarioHasRol usuarioHasRol = new UsuarioHasRol();
+	        usuarioHasRol.setId(usuarioRolPk);
+	        
+	        Rol rolCliente = new Rol();
+	        rolCliente.setIdRol(3); 
+	        
+	        objUsuario.getRoles().add(rolCliente);
+	        
+	        Usuario objSalida = usuarioService.registrar(objUsuario);
+	        
+	        if (objSalida == null) {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	        } else {
+	            salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
+	    }
+	    return ResponseEntity.ok(salida);
 	}
 }

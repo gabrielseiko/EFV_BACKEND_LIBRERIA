@@ -23,7 +23,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Usuario registrar(Usuario objUsuario) {
-        // Cifrar la contraseña antes de guardar
         String encodedPassword = passwordEncoder.encode(objUsuario.getContrasenia());
         objUsuario.setContrasenia(encodedPassword);
         return repository.save(objUsuario);
@@ -58,6 +57,21 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public List<Rol> traerRolesDeUsuario(int idUsuario) {
 		return repository.traerRolesDeUsuario(idUsuario);
+	}
+
+	@Override
+	public List<Usuario> listarTrabajador(int idUsuario) {
+		return repository.listaTrabajador(idUsuario);
+	}
+
+	@Override
+	public List<Usuario> findAllTrabajadores() {
+		return repository.findAllTrabajadores();
+	}
+
+	@Override
+	public List<Usuario> listarClientes() {
+		return repository.listarClientes();
 	}
 
 }
