@@ -23,4 +23,16 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	public abstract Usuario findByUser(String user);
 	
+	//LISTA TRABAJADORES CON PARAMETO (TRABAJADORES DEL ADMINISTRADOR)
+	@Query("SELECT u FROM Usuario u WHERE u.idRecursivo.idUsuario = :idUsuario ORDER BY u.apellidos DESC")
+	public abstract List<Usuario> listaTrabajador(@Param("idUsuario") int idUsuario);
+	
+	//LISTAR TODOS LOS TRABAJADORES
+    @Query("SELECT u FROM Usuario u JOIN u.roles r WHERE r.idRol = 2")
+    public abstract List<Usuario> findAllTrabajadores();
+
+    //LISTAR TODOS LOS CLIENTES
+    @Query("SELECT u FROM Usuario u JOIN u.roles r WHERE r.idRol = 3")
+    public abstract List<Usuario> listarClientes();
+
 }

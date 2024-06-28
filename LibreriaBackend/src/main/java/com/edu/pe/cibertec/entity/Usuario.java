@@ -1,6 +1,8 @@
 package com.edu.pe.cibertec.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -47,7 +51,7 @@ public class Usuario {
     private String email;
     
     @Column(name = "fechaNac")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaNac;
     
     @Column(name = "sexo")
@@ -64,6 +68,12 @@ public class Usuario {
     @JoinColumn(name = "idRecursivo")
     private Usuario idRecursivo;
     
+    @JsonIgnoreProperties("usuarios")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tbl_usuario_has_rol",
+               joinColumns = @JoinColumn(name = "idUsuario"),
+               inverseJoinColumns = @JoinColumn(name = "idRol"))
+    private Set<Rol> roles = new HashSet<>();
     
     public String getNombreCompleto() {
 		if (nombres != null && apellidos != null) {
