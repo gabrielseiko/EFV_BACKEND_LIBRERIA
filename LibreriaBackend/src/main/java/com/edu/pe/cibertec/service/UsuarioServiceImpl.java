@@ -74,4 +74,44 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.listarClientes();
 	}
 
+	@Override
+	public List<Usuario> listaUsuarioNombreLike(String nombres) {
+		return repository.listaUsuarioNombreLike(nombres);
+	}
+
+	@Override
+	public List<Usuario> listaTrabajadorNombreLike(String nombres) {
+		return repository.listaTrabajadorNombreLike(nombres);
+	}
+
+	@Override
+	public List<Usuario> listaClienteNombreLike(String nombres) {
+		return repository.listaClienteNombreLike(nombres);
+	}
+
+	@Override
+	public List<Usuario> validaApellidoLike(String apellidos) {
+		return repository.validaApellidoLike(apellidos);
+	}
+
+	@Override
+	public List<Usuario> validaDniLike(String dni) {
+		return repository.validaDniLike(dni);
+	}
+
+	@Override
+	public List<Usuario> validaEmailLike(String email) {
+		return repository.validaEmailLike(email);
+	}
+
+	@Override
+	public List<Usuario> validaUserLike(String user) {
+		return repository.validaUserLike(user);
+	}
+
+	@Override
+	public List<Usuario> validaNombreLike(String nombres) {
+		return repository.validaNombreLike(nombres);
+	}
+
 }

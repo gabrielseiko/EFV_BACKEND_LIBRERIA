@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.pe.cibertec.entity.Autor;
 import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
 import com.edu.pe.cibertec.entity.UsuarioHasRol;
@@ -224,5 +226,82 @@ public class UsuarioController {
 	        salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 	    }
 	    return ResponseEntity.ok(salida);
+	}
+	
+	//VALIDACIONES Y CONSULTA 
+	//CONSULA USUARIO POR NOMBRE TRABAJADOR
+	@GetMapping("/listaTrabajadorPorNombreLike/{var}")
+	@ResponseBody
+	public ResponseEntity<?> listaTrabajadorPorNombreLike(@PathVariable("var") String nombres){
+		List<Usuario> listaSalida = null;
+		if(nombres.equals("todos")) {
+			listaSalida = usuarioService.findAllTrabajadores();
+		}else {
+			listaSalida = usuarioService.listaTrabajadorNombreLike(nombres + "%");
+		}
+		return ResponseEntity.ok(listaSalida);
+	}
+	//CONSULA USUARIO POR NOMBRE CLIENTE
+	@GetMapping("/listaClientePorNombreLike/{var}")
+	@ResponseBody
+	public ResponseEntity<?> listaClientePorNombreLike(@PathVariable("var") String nombres){
+		List<Usuario> listaSalida = null;
+		if(nombres.equals("todos")) {
+			listaSalida = usuarioService.listarClientes();
+		}else {
+			listaSalida = usuarioService.listaClienteNombreLike(nombres + "%");
+		}
+		return ResponseEntity.ok(listaSalida);
+	}
+	//VALIDACION POR NOMBRE 
+	@GetMapping("/validaNombre")
+	public String validaNombre (@RequestParam(name ="nombres") String nombres) {
+		List<Usuario> listSalida = usuarioService.validaNombreLike(nombres);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
+	}
+	//VALIDACION POR APELLIDO 
+	@GetMapping("/validaApellidos")
+	public String validaApellidos (@RequestParam(name ="apellidos") String apellidos) {
+		List<Usuario> listSalida = usuarioService.validaApellidoLike(apellidos);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
+	}
+	
+	//VALIDACION POR DNI 
+	@GetMapping("/validaDni")
+	public String validaDni (@RequestParam(name ="dni") String dni) {
+		List<Usuario> listSalida = usuarioService.validaDniLike(dni);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
+	}
+	//VALIDACION POR EMAIL
+	@GetMapping("/validaEmail")
+	public String validaEmail (@RequestParam(name ="email") String email) {
+		List<Usuario> listSalida = usuarioService.validaEmailLike(email);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
+	}
+	//VALIDACION POR USER
+	@GetMapping("/validaUser")
+	public String validaUser (@RequestParam(name ="user") String user) {
+		List<Usuario> listSalida = usuarioService.validaUserLike(user);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
 	}
 }
