@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -109,5 +110,15 @@ public class AutorController {
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
 		}
 		return ResponseEntity.ok(salida);
+	}
+	//VALIDACION AUTOR
+	@GetMapping("/validaNombreCompleto")
+	public String validaNombreCompleto (@RequestParam(name ="nombreCompleto") String nombreCompleto) {
+		List<Autor> listSalida = autorService.listaAutorNombreLike(nombreCompleto);
+		 if (listSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
 	}
 }

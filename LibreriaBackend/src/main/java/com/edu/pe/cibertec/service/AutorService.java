@@ -11,4 +11,6 @@ public interface AutorService {
 	public abstract Optional<Autor> buscarAutor(int id);
 	public abstract Autor registrar(Autor objAutor);
 	public abstract void eliminarAutor(int id);
+	//VALIDACION
+	public abstract List<Autor> listaAutorNombreLike(String nombreCompleto);
 }
