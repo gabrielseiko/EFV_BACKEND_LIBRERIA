@@ -121,4 +121,16 @@ public class AutorController {
 			 return "{\"valid\":false}";
 		 }
 	}
+	//CONSULTA DE AUTORES POR NOMBRE
+	@GetMapping("/listaAutoresPorNombreLike/{var}")
+	@ResponseBody
+	public ResponseEntity<?> listaAutoresPorNombreLike(@PathVariable("var") String nombreCompleto){
+		List<Autor> listaSalida = null;
+		if(nombreCompleto.equals("todos")) {
+			listaSalida = autorService.listadoAutores();
+		}else {
+			listaSalida = autorService.listaAutorNombreLike(nombreCompleto + "%");
+		}
+		return ResponseEntity.ok(listaSalida);
+	}
 }

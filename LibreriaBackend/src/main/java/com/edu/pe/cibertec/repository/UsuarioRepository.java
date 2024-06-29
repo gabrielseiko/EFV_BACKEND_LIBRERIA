@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.edu.pe.cibertec.entity.Autor;
 import com.edu.pe.cibertec.entity.Enlace;
 import com.edu.pe.cibertec.entity.Rol;
 import com.edu.pe.cibertec.entity.Usuario;
@@ -34,5 +35,38 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     //LISTAR TODOS LOS CLIENTES
     @Query("SELECT u FROM Usuario u JOIN u.roles r WHERE r.idRol = 3")
     public abstract List<Usuario> listarClientes();
+    
+    //CONSULTA POR NOMBRE
+	@Query("SELECT a FROM Usuario a WHERE a.nombres LIKE ?1")
+	public abstract List<Usuario> listaUsuarioNombreLike(String nombres);
+	
+	//CONSULTA y VALIDACION POR NOMBRE Y ROL TRABAJADOR
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.nombres LIKE %?1% AND r.idRol = 2")
+	public abstract List<Usuario> listaTrabajadorNombreLike(String nombres);
+
+	//CONSULTA y VALIDACION POR NOMBRE Y ROL CLIENTE
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.nombres LIKE %?1% AND r.idRol = 3")
+	public abstract List<Usuario> listaClienteNombreLike(String nombres);
+	
+	//VALIDACION POR APELLIDO
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.nombres LIKE ?1")
+	public abstract List<Usuario> validaNombreLike(String nombres);
+	
+	//VALIDACION POR APELLIDO
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.apellidos LIKE ?1")
+	public abstract List<Usuario> validaApellidoLike(String apellidos);
+	
+	//VALIDACION POR DNI
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.dni LIKE ?1")
+	public abstract List<Usuario> validaDniLike(String dni);
+
+	//VALIDACION POR EMAIL
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.email LIKE ?1")
+	public abstract List<Usuario> validaEmailLike(String email);
+	
+	//VALIDACION POR USER
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN u.roles r WHERE u.user LIKE ?1")
+	public abstract List<Usuario> validaUserLike(String user);
+
 
 }
