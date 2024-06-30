@@ -1,5 +1,6 @@
 package com.edu.pe.cibertec.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +61,15 @@ public class ReservaController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			objReserva.setIdPrestamo(0);
+			objReserva.setFechaReserva(new Date());
+			objReserva.setFechaDevolucion(new Date());
+			objReserva.setEstado(AppSettings.PRESTADO);
 			
-			Reserva objSalida = reservaService.registrar(objReserva);
+			Reserva objSalida = reservaService.insertaActualizaReserva(objReserva);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO + " Reserva de ID ==> " + objReserva.getIdPrestamo() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,11 +84,12 @@ public class ReservaController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 
-			Reserva objSalida = reservaService.registrar(objReserva);
+			objReserva.setFechaDevolucion(new Date());
+			Reserva objSalida = reservaService.insertaActualizaReserva(objReserva);
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO + " Reserva de ID ==> " + objReserva.getIdPrestamo() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,7 +104,7 @@ public class ReservaController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			reservaService.eliminarReserva(idReserva);
-			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
+			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO + " Reserva de ID ==> " + idReserva + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);

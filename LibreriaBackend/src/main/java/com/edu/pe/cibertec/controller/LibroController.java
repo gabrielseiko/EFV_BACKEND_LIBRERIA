@@ -249,6 +249,13 @@ public class LibroController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	
+	// Lista libros reserva por categoria
+	@GetMapping("/listaLibroReservaPorCategoria/{categoria}")
+	@ResponseBody
+	public List<LibroReserva> verLibrosReservaPorCategoria(@PathVariable("categoria") int idCategoria) {
+		return reservaService.listaLibroReservaPorCategoria(idCategoria);
+	}
 
 	// LIBRO VENTA
 	// Listar libros
@@ -328,6 +335,13 @@ public class LibroController {
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
 		}
 		return ResponseEntity.ok(salida);
+	}
+	
+	// Lista libros venta por categoria
+	@GetMapping("/listaLibroVentaPorCategoria/{categoria}")
+	@ResponseBody
+	public List<LibroVenta> verLibrosVentaPorCategoria(@PathVariable("categoria") int idCategoria) {
+		return ventaService.listaLibroVentaPorCategoria(idCategoria);
 	}
 
 }

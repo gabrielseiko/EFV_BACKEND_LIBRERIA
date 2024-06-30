@@ -79,7 +79,7 @@ public class CategoriaController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_REG_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_REG_EXITOSO + " Categoria de ID ==> " + obj.getIdCategoria() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class CategoriaController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO);
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO + "Categoria de ID ==> " + obj.getIdCategoria() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class CategoriaController {
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			categoriaService.eliminaCategoria(idCategoria);
-			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO);
+			salida.put("mensaje", AppSettings.MENSAJE_ELI_EXITOSO + " Categoria de ID ==> " + idCategoria + "." );
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", AppSettings.MENSAJE_ELI_ERROR);
@@ -124,6 +124,18 @@ public class CategoriaController {
 	@GetMapping("/validaDescripcionRegistra")
 	public String validaDescripcion(@RequestParam(name = "descripcion")String descripcion) {
 		 List<Categoria> lstSalida =categoriaService.listaCategoriaPorDescripcionIgual(descripcion);
+		 if (lstSalida.isEmpty()) {
+			 return "{\"valid\":true}";
+		 }else {
+			 return "{\"valid\":false}";
+		 }
+			
+	}
+	
+	@GetMapping("/validaDescripcionActualiza")
+	public String validaDescripcion(@RequestParam(name = "descripcion")String descripcion,
+									@RequestParam(name = "idCategoria")int idCategoria) {
+		 List<Categoria> lstSalida =categoriaService.listaCategoriaPorDescripcionIgualActualiza(descripcion, idCategoria);
 		 if (lstSalida.isEmpty()) {
 			 return "{\"valid\":true}";
 		 }else {

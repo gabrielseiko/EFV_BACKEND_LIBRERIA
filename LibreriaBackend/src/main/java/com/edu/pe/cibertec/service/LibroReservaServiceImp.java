@@ -49,4 +49,9 @@ public class LibroReservaServiceImp implements LibroReservaService {
 		return repository.validacionLibroReservaActualiza(idLibro, idLibroReserva);
 	}
 
+	@Override
+	public List<LibroReserva> listaLibroReservaPorCategoria(int idCategoria) {
+		return repository.listaLibroReservaPorCategoria(idCategoria);
+	}
+
 }
