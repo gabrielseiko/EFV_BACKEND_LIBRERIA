@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.edu.pe.cibertec.entity.LibroReserva;
 import com.edu.pe.cibertec.entity.LibroVenta;
 
 public interface LibroVentaRepository extends JpaRepository<LibroVenta, Integer>{
@@ -22,5 +21,8 @@ public interface LibroVentaRepository extends JpaRepository<LibroVenta, Integer>
 	
 	@Query("select l from LibroVenta l where l.libro.idLibro = :idLibro and l.idLibroVenta != :idLibroVenta")
 	Optional<LibroVenta> validacionLibroVentaActualiza(@Param("idLibro")int idLibro, @Param("idLibroVenta")int idLibroVenta);
+	
+	@Query("select l from LibroVenta l where l.libro.categoria.idCategoria = :idCategoria")
+	public abstract List<LibroVenta> listaLibroVentaPorCategoria(@Param("idCategoria")int idCategoria);
 
 }

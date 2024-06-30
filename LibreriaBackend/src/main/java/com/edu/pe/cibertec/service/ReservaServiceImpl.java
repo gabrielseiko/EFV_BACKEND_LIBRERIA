@@ -16,7 +16,7 @@ public class ReservaServiceImpl implements ReservaService {
 	private ReservaRepository repository;
 	
 	@Override
-	public Reserva registrar(Reserva objReserva) {
+	public Reserva insertaActualizaReserva(Reserva objReserva) {
 		return repository.save(objReserva);
 	}
 

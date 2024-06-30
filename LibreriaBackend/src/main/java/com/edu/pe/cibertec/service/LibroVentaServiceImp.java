@@ -50,4 +50,9 @@ public class LibroVentaServiceImp implements LibroVentaService {
 		return repository.validacionLibroVentaActualiza(idLibro, idLibroVenta);
 	}
 
+	@Override
+	public List<LibroVenta> listaLibroVentaPorCategoria(int idCategoria) {
+		return repository.listaLibroVentaPorCategoria(idCategoria);
+	}
+
 }

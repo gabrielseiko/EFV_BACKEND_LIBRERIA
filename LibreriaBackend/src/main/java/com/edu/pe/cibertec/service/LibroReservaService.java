@@ -3,6 +3,7 @@ package com.edu.pe.cibertec.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.repository.query.Param;
 
 import com.edu.pe.cibertec.entity.LibroReserva;
 
@@ -19,5 +20,8 @@ public interface LibroReservaService {
 	public abstract void eliminaLibroReserva(int id);
 
 	public abstract List<LibroReserva> listaLibroReserva();
+	
+	//Lista por categoria
+	public abstract List<LibroReserva> listaLibroReservaPorCategoria(@Param("idCategoria")int idCategoria);
 
 }

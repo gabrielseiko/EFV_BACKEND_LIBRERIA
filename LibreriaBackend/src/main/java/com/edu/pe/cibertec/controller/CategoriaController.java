@@ -98,7 +98,7 @@ public class CategoriaController {
 			if (objSalida == null) {
 				salida.put("mensaje", AppSettings.MENSAJE_ACT_ERROR);
 			} else {
-				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO + " Categoria de ID ==> " + obj.getIdCategoria() + ".");
+				salida.put("mensaje", AppSettings.MENSAJE_ACT_EXITOSO + "Categoria de ID ==> " + obj.getIdCategoria() + ".");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
