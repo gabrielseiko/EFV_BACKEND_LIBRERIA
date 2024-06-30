@@ -34,6 +34,11 @@ public class AutorServiceImpl implements AutorService {
 	public void eliminarAutor(int id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public List<Autor> listaAutorNombreLike(String nombreCompleto) {
+		return repository.listaAutorNombreLike(nombreCompleto);
+	}
 	
 
 }
