@@ -28,4 +28,5 @@ public interface LibroVentaRepository extends JpaRepository<LibroVenta, Integer>
 	@Query("select l from LibroReserva l where l.estado = ?1")
 	public abstract List<LibroVenta> listaLibroVentaDisponible(int estado);
 
+
 }

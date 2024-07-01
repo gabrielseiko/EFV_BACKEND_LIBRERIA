@@ -59,5 +59,4 @@ public class LibroVentaServiceImp implements LibroVentaService {
 	public List<LibroVenta> listaLibroVentaDisponible(int estado) {
 		return repository.listaLibroVentaDisponible(estado);
 	}
-
 }

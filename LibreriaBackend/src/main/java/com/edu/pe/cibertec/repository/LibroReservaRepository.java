@@ -30,4 +30,5 @@ public interface LibroReservaRepository extends JpaRepository<LibroReserva, Inte
 	@Query("select l from LibroReserva l where l.estado = ?1")
 	public abstract List<LibroReserva> listaLibroReservaDisponible(int estado);
 
+
 }

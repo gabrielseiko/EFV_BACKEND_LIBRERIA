@@ -26,4 +26,5 @@ public interface LibroReservaService {
 	
 	public abstract List<LibroReserva> listaLibroReservaDisponible(int estado);
 
+
 }
