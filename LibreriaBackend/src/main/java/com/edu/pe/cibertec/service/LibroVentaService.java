@@ -23,4 +23,6 @@ public interface LibroVentaService {
 	
 	//Lista por categoria
 	public abstract List<LibroVenta> listaLibroVentaPorCategoria(int idCategoria);
+	
+	public abstract List<LibroVenta> listaLibroVentaDisponible(int estado);
 }

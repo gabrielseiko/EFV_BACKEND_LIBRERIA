@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.pe.cibertec.entity.Libro;
 import com.edu.pe.cibertec.entity.Reserva;
 import com.edu.pe.cibertec.service.ReservaService;
 import com.edu.pe.cibertec.util.AppSettings;
@@ -35,6 +36,12 @@ public class ReservaController {
 	public ResponseEntity<List<Reserva>> listarReservas(){
 		List<Reserva> salida = reservaService.listarReservas();
 		return ResponseEntity.ok(salida);
+	}
+	
+	@GetMapping("/listaReservasPorCliente/{cliente}")
+	@ResponseBody
+	public List<Reserva> listarReservasCliente(@PathVariable("cliente") int idCliente) {
+		return reservaService.listaReservasCliente(idCliente);
 	}
 	
 	@GetMapping("/{id}")

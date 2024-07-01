@@ -23,5 +23,7 @@ public interface LibroReservaService {
 	
 	//Lista por categoria
 	public abstract List<LibroReserva> listaLibroReservaPorCategoria(@Param("idCategoria")int idCategoria);
+	
+	public abstract List<LibroReserva> listaLibroReservaDisponible(int estado);
 
 }

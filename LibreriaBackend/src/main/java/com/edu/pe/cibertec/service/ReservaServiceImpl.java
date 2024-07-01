@@ -35,4 +35,9 @@ public class ReservaServiceImpl implements ReservaService {
 		repository.deleteById(id);
 	}
 
+	@Override
+	public List<Reserva> listaReservasCliente(int idUsuario) {
+		return repository.listaReservasCliente(idUsuario);
+	}
+
 }
