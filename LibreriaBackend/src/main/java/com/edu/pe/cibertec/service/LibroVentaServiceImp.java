@@ -55,4 +55,8 @@ public class LibroVentaServiceImp implements LibroVentaService {
 		return repository.listaLibroVentaPorCategoria(idCategoria);
 	}
 
+	@Override
+	public List<LibroVenta> listaLibroVentaDisponible(int estado) {
+		return repository.listaLibroVentaDisponible(estado);
+	}
 }

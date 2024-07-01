@@ -24,7 +24,11 @@ public interface LibroReservaRepository extends JpaRepository<LibroReserva, Inte
 	@Query("select l from LibroReserva l where l.libro.idLibro = :idLibro and l.idLibroReserva != :idLibroReserva")
 	Optional<LibroReserva> validacionLibroReservaActualiza(@Param("idLibro")int idLibro, @Param("idLibroReserva")int idLibroReserva);
 	
-	@Query("select l from LibroReserva l where l.libro.categoria.idCategoria = :idCategoria")
+	@Query("select l from LibroReserva l where l.libro.categoria.idCategoria = :idCategoria and l.estado = 1")
 	public abstract List<LibroReserva> listaLibroReservaPorCategoria(@Param("idCategoria")int idCategoria);
+	
+	@Query("select l from LibroReserva l where l.estado = ?1")
+	public abstract List<LibroReserva> listaLibroReservaDisponible(int estado);
+
 
 }

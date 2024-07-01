@@ -176,6 +176,12 @@ public class LibroController {
 		List<LibroReserva> lstSalida = reservaService.listaLibroReserva();
 		return ResponseEntity.ok(lstSalida);
 	}
+	
+	@GetMapping("/librosReservaDisponible")
+	public ResponseEntity<List<LibroReserva>> listaLibrosReserva() {
+		List<LibroReserva> lstSalida = reservaService.listaLibroReservaDisponible(1);
+		return ResponseEntity.ok(lstSalida);
+	}
 
 	// Registra libro reserva
 	@PostMapping("/registraLibroReserva")
@@ -262,6 +268,12 @@ public class LibroController {
 	@GetMapping("/venta")
 	public ResponseEntity<List<LibroVenta>> listaVenta() {
 		List<LibroVenta> lstSalida = ventaService.listaLibroVenta();
+		return ResponseEntity.ok(lstSalida);
+	}
+	
+	@GetMapping("/librosVentaDisponible")
+	public ResponseEntity<List<LibroVenta>> listaLibrosVenta() {
+		List<LibroVenta> lstSalida = ventaService.listaLibroVentaDisponible(1);
 		return ResponseEntity.ok(lstSalida);
 	}
 
